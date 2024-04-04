@@ -1,7 +1,21 @@
-<body style="background-color:#000000"></bodystyle>>
-    <figure>
-        <figcaption style="color:blueviolet">Ephesians 5:8-21</figcaption>
-        <audio controls src="recording.mp3"></audio>
-        <a href="recording.mp3" style="color:blueviolet"> Download audio </a>
-    </figure>
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Recommended meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <!-- PyScript CSS -->
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+        <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+        <script src="speakClient.js"></script>
+    </head>
+    <body style="background-color:#000000">
+        <h1 style="color:blueviolet">John's Bible App</h1>
+        <p>U-Week 2024 Verse - Ephesians 5:8-21</p>
+        <input type="text" id="english" placeholder="Type verse..." py-keypress="gen_output"/>
+
+        <div id="audio"></div>
+        <div id="output" style="color:blueviolet"></div>
+        <script type="py" src="./say_text.py" config="./pyscript.json"></script>
+    </body>
+</html>

@@ -1,0 +1,4 @@
+{
+    "packages": ["pyttsx3"],
+    "files": {"asv.txt": "asv.txt"}
+}
