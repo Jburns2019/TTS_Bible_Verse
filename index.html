@@ -11,8 +11,19 @@
     </head>
     <body style="background-color:#000000">
         <h1 style="color:blueviolet">John's Bible App</h1>
-        <p>U-Week 2024 Verse - Ephesians 5:8-21</p>
-        <input type="text" id="english" placeholder="Type verse..." py-keypress="gen_output"/>
+        <p style="color:#ffffff">U-Week 2024 Verse - Ephesians 5:8-21</p>
+        <button onClick="window.location.reload();">Refresh page</button>
+        
+        <br>
+        <br>
+
+        <input type="text" id="english" placeholder="Type verse..." py-keypress="start_generating_output"/>
+        <button py-click="start_generating_output">Find Verse</button>
+
+        <br>
+        <br>
+
+        <button py-click="start_generating_random_reading">Generate Random Devotional</button>
 
         <div id="audio"></div>
         <div id="output" style="color:blueviolet"></div>
