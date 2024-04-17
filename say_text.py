@@ -35,10 +35,11 @@ def parse_verse(line: str, want_text=True):
     return (book, chap, verse, text)
 
 def convert_to_dictionary():
-    bible = open('asv.txt', 'r')
+    bible = open('World_English_Version.txt', encoding='utf8')
+
     bible_dictionary = {}
     for line in bible.readlines():
-        line = line.replace('\n', '')
+        line = line.replace('\n', '').replace('\t', ' ')
 
         if line.count(' ') > 2 and ':' in line:
             book, chap, verse, text = parse_verse(line, want_text=True)
@@ -218,9 +219,9 @@ def start_generating_random_reading(event=None):
     start_output(gen_random_reading, event)
 
 def gen_random_reading(event):
-    try:        
-        bible = convert_to_dictionary()
-
+          
+    bible = convert_to_dictionary()
+    try:  
         books = list(bible.keys())
 
         random_book_start = random.choice(books)
@@ -255,5 +256,3 @@ if __name__ == '__main__' and not html_accessed:
     print('I launched a thread.')
     start_generating_random_reading()
     start_generating_output()
-    # gen_output()
-    # gen_random_reading()
