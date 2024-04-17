@@ -35,7 +35,7 @@ def parse_verse(line: str, want_text=True):
     return (book, chap, verse, text)
 
 def convert_to_dictionary():
-    bible = open('asv.txt', encoding='utf8')
+    bible = open('World_English_Version.txt', encoding='utf8')
 
     bible_dictionary = {}
     for line in bible.readlines():
@@ -219,9 +219,8 @@ def start_generating_random_reading(event=None):
     start_output(gen_random_reading, event)
 
 def gen_random_reading(event):
-          
-    bible = convert_to_dictionary()
-    try:  
+    try:
+        bible = convert_to_dictionary()
         books = list(bible.keys())
 
         random_book_start = random.choice(books)
