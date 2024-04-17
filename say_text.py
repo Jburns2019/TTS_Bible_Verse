@@ -35,7 +35,7 @@ def parse_verse(line: str, want_text=True):
     return (book, chap, verse, text)
 
 def convert_to_dictionary():
-    bible = open('World_English_Version.txt', encoding='utf8')
+    bible = open('asv.txt', encoding='utf8')
 
     bible_dictionary = {}
     for line in bible.readlines():
