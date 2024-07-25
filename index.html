@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- Recommended meta tags -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>John's Bible App</title>
+        <link rel="stylesheet" type="text/css" href="page_style.css">
         <!-- PyScript CSS -->
         <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
         <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
         <script src="speakClient.js"></script>
     </head>
-    <body style="background-color:#000000">
-        <h1 style="color:blueviolet">John's Bible App</h1>
-        <p style="color:#ffffff">U-Week 2024 Verse - Ephesians 5:8-21</p>
-        <button onClick="window.location.reload();">Refresh page</button>
+    <body>
+        <header>
+            <div class="a">
+                <h1>Bible App - World English Version</h1>
+            </div>
+        </header>
+
+        <h2>Display Verse(s)</h2>
+        <div class="section">
+            <p>Example Verse - Ephesians 5:8-21</p>
+            <input type="text" id="english" placeholder="Type verse..." py-keypress="start_generating_output"/>
+            <button class="no-margin" py-click="start_generating_output">Find Verse</button>
+            
+            <div class="section" id="find-verse-output"></div>
+        </div>
+
+        <h2>Generate Random Devotional</h2>
+        <div class="section">
+            <p>
+                Perhaps you don't know what you're looking for. Let Jesus take the wheel on your devitional journey. Filters are currently unavailable.<br>
+                A random chapter will be selected. If the chapter is less than 1000 characters long it will be considered too short and next chapter will be appended.
+            </p>
+            <button py-click="start_generating_random_reading">Generate Random Devotional</button>
+
+            <div class="section" id="devotion-output"></div>
+        </div>
         
-        <br>
-        <br>
-
-        <input type="text" id="english" placeholder="Type verse..." py-keypress="start_generating_output"/>
-        <button py-click="start_generating_output">Find Verse</button>
-
-        <br>
-        <br>
-
-        <button py-click="start_generating_random_reading">Generate Random Devotional</button>
 
         <div id="audio"></div>
-        <div id="output" style="color:blueviolet"></div>
         <script type="py" src="./say_text.py" config="./pyscript.json"></script>
     </body>
 </html>

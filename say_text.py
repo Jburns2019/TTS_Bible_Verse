@@ -145,9 +145,9 @@ def get_text(bible, prompt: str):
 
     return (text, speach_text)
 
-def output_text(text: str, speach_text: str, event):
+def output_text(text: str, speach_text: str, output_location: str, event):
     if html_accessed:
-        output_div = document.querySelector("#output")
+        output_div = document.querySelector(output_location)
         output_div.innerText = text
     else:
         print(text)
@@ -201,7 +201,7 @@ def gen_output(event):
             text = '[Error]: Prompt was not accepted.'
             speach_text = ''
 
-        output_text(text, speach_text, event)
+        output_text(text, speach_text, '#find-verse-output', event)
 
 def get_next_chapter(bible, books: list, random_book_start: str, random_chapter_start: str):
     book_end = random_book_start
@@ -248,7 +248,7 @@ def gen_random_reading(event):
         text = '[Error]: Prompt was not accepted.'
         speach_text = ''
     
-    output_text(text, speach_text, event)
+    output_text(text, speach_text, '#devotion-output', event)
 
 if __name__ == '__main__' and not html_accessed:
     start_generating_random_reading()
