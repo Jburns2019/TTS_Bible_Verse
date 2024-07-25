@@ -103,21 +103,27 @@ button {
     cursor: pointer;
     background-color: var(--active_button_bg_color);
     color: var(--text_color);
-    /* margin: 5px 0; */
     border-radius: 8px;
-    transition: background-color 0.3s ease;
+}
+
+label {
+    background-color: var(--active_button_bg_color);
+    color: var(--text_color);
+    border-radius: 8px;
+}
+select {
+    cursor: pointer;
+    background-color: var(--active_button_bg_color);
+    color: var(--text_color);
+    border-radius: 8px;
 }
 
 .custom_buttons button {
-    cursor: pointer;
     width: 100%;
     text-align: left;
-    background-color: var(--active_button_bg_color);
-    color: var(--text_color);
     border: none;
     padding: 10px 15px;
     margin: 5px 0;
-    border-radius: 8px;
     transition: background-color 0.3s ease;
 }
 

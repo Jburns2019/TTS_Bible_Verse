@@ -146,16 +146,22 @@ def get_text(bible, prompt: str):
     return (text, speach_text)
 
 def output_text(text: str, speach_text: str, output_location: str, event):
+    want_tts = True
     if html_accessed:
-        output_div = document.querySelector(output_location)
+        dropdown = document.querySelector('#' + output_location + '-audio')
+        selected_option = dropdown.options[dropdown.selectedIndex]
+        want_tts = bool(selected_option.value)
+
+    if html_accessed:
+        output_div = document.querySelector('#' + output_location + '-output')
         output_div.innerText = text
     else:
         print(text)
     
-    if event != None and len(text) < 350000:
+    if want_tts and event != None and len(text) < 350000:
         #https://github.com/kripken/speak.js/tree/master
         js.speak(speach_text)
-    elif event == None:
+    elif event == None and want_tts:
         sayable_outputs = []
         for character_index in range(0, len(speach_text), 350000):
             max_val = min(character_index + 350000, len(speach_text))
@@ -201,7 +207,7 @@ def gen_output(event):
             text = '[Error]: Prompt was not accepted.'
             speach_text = ''
 
-        output_text(text, speach_text, '#find-verse-output', event)
+        output_text(text, speach_text, 'find-verse', event)
 
 def get_next_chapter(bible, books: list, random_book_start: str, random_chapter_start: str):
     book_end = random_book_start
@@ -248,7 +254,7 @@ def gen_random_reading(event):
         text = '[Error]: Prompt was not accepted.'
         speach_text = ''
     
-    output_text(text, speach_text, '#devotion-output', event)
+    output_text(text, speach_text, 'devotion', event)
 
 if __name__ == '__main__' and not html_accessed:
     start_generating_random_reading()
