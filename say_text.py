@@ -265,20 +265,20 @@ def start_generating_output(event=None):
 
 def gen_output(event):
     if event == None or event != None and (not hasattr(event, 'key') or event.key == 'Enter' ):
-        # try:
-        bible = convert_to_dictionary()
-        
-        prompt = 'Genesis 1:1'#'Ephesians 5:8-21'
-        if html_accessed:
-            input_text = document.querySelector("#english")
-            prompt = input_text.value
+        try:
+            bible = convert_to_dictionary()
+            
+            prompt = 'Genesis 1:1'#'Ephesians 5:8-21'
+            if html_accessed:
+                input_text = document.querySelector("#english")
+                prompt = input_text.value
 
-        text, speach_text, prompt = get_text(bible, prompt)
-        text = prompt + '\n' + text
-        speach_text = prompt.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
-        # except:
-        #     text = '[Error]: Prompt was not accepted.'
-        #     speach_text = ''
+            text, speach_text, prompt = get_text(bible, prompt)
+            text = prompt + '\n' + text
+            speach_text = prompt.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
+        except:
+            text = '[Error]: Prompt was not accepted.'
+            speach_text = ''
 
         output_text(text, speach_text, 'find-verse', event)
 
@@ -298,33 +298,33 @@ def start_generating_random_reading(event=None):
     start_output(gen_random_reading, event)
 
 def gen_random_reading(event):
-    # try:
-    bible = convert_to_dictionary()
-    books = list(bible.keys())
+    try:
+        bible = convert_to_dictionary()
+        books = list(bible.keys())
 
-    random_book_start = random.choice(books)
-    random_chapter_start = random.choice(list(bible[random_book_start].keys()))
-    
-    book_end, chapter_end = (random_book_start, random_chapter_start)
-    verse_end = list(bible[book_end][chapter_end].keys())[-1]
-    verse_text = f'{random_book_start} {random_chapter_start}:1-{book_end} {chapter_end}:{verse_end}'
-
-    prev_length = 0
-    length = len(get_text(bible, verse_text)[0])
-    while len(get_text(bible, verse_text)[0]) < 5000 and length > prev_length:
-        book_end, chapter_end = get_next_chapter(bible, books, book_end, chapter_end)
+        random_book_start = random.choice(books)
+        random_chapter_start = random.choice(list(bible[random_book_start].keys()))
+        
+        book_end, chapter_end = (random_book_start, random_chapter_start)
         verse_end = list(bible[book_end][chapter_end].keys())[-1]
         verse_text = f'{random_book_start} {random_chapter_start}:1-{book_end} {chapter_end}:{verse_end}'
 
-        prev_length = length
+        prev_length = 0
         length = len(get_text(bible, verse_text)[0])
+        while len(get_text(bible, verse_text)[0]) < 5000 and length > prev_length:
+            book_end, chapter_end = get_next_chapter(bible, books, book_end, chapter_end)
+            verse_end = list(bible[book_end][chapter_end].keys())[-1]
+            verse_text = f'{random_book_start} {random_chapter_start}:1-{book_end} {chapter_end}:{verse_end}'
 
-    text, speach_text, _ = get_text(bible, verse_text)
-    text = verse_text + '\n' + text
-    speach_text = verse_text.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
-    # except:
-    #     text = '[Error]: Prompt was not accepted.'
-    #     speach_text = ''
+            prev_length = length
+            length = len(get_text(bible, verse_text)[0])
+
+        text, speach_text, _ = get_text(bible, verse_text)
+        text = verse_text + '\n' + text
+        speach_text = verse_text.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
+    except:
+        text = '[Error]: Prompt was not accepted.'
+        speach_text = ''
     
     output_text(text, speach_text, 'devotion', event)
 
