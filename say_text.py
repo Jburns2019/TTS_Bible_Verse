@@ -156,9 +156,12 @@ def output_text(text: str, speach_text: str, output_location: str, event):
         if len(lines) > 0:
             title = lines[0]
 
-            output_div = document.querySelector('#' + output_location + '-dropdown')
-            output_div.innerText = title
+            button_div = document.querySelector('#' + output_location + '-dropdown')
+            button_div.innerText = title
 
+            document.getElementById('#' + output_location + '-dropdown').classList.toggle('hidden')
+            button_div.classList.toggle('plus')
+            button_div.classList.toggle('minus')
 
         output_div = document.querySelector('#' + output_location + '-output')
         output_div.innerText = text
