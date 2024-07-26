@@ -118,19 +118,26 @@ def valid_verse(bible: dict, verse_breakdown: list):
         
         book = best_book
 
-    return book in bible and chap in bible[book] and verse in bible[book][chap]
+    return (book in bible and chap in bible[book] and verse in bible[book][chap], book)
 
 def get_all_verses(bible: dict, elipse: list):
     verse_list = []
     named_list = []
 
-    if len(elipse) == 1 and valid_verse(bible, elipse[0]):
+    validity_1, best_book_1 = valid_verse(bible, elipse[0])
+    if len(elipse) == 1 and validity_1:
         book, chap, verse = elipse[0]
+        book = best_book_1
+
         verse_list.append(bible[book][chap][verse])
         named_list = [f'{book} {chap}:{verse}: ']
-    if len(elipse) > 1 and valid_verse(bible, elipse[0]) and valid_verse(bible, elipse[1]):
+    
+    validity_2, best_book_2 = valid_verse(bible, elipse[1])
+    if len(elipse) > 1 and validity_1 and validity_2:
         book_beg, chap_beg, verse_beg = elipse[0]
+        book_beg = best_book_1
         book_end, chap_end, verse_end = elipse[1]
+        book_end = best_book_2
 
         books = list(bible.keys())
         book_beg_index = books.index(book_beg)
