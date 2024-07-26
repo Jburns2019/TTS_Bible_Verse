@@ -109,7 +109,7 @@ def parse_prompt(bible: dict, prompt: str):
 def find_closest_book(bible: dict, book: str):
     best_book = book
     if not book in bible:
-        best_score = len(book)
+        best_score = 20
         for pot_book in bible:
             pot_score = distance(book, pot_book)
             if pot_score < best_score:
