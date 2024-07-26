@@ -3,5 +3,3 @@ function toggle_visibility(id_name, button) {
     button.classList.toggle('plus')
     button.classList.toggle('minus')
 }
-
-await pyodide.loadPackage("numpy")
