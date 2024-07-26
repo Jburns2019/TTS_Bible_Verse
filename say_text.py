@@ -1,6 +1,5 @@
 import js
 import random
-from Levenshtein import distance
 
 html_accessed = True
 try:
@@ -8,6 +7,8 @@ try:
 except:
     import multiprocessing
     html_accessed = False
+
+from Levenshtein import distance
 
 def say_text(text: str):
     import pyttsx3
