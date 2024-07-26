@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>John's Bible App</title>
         <link rel="stylesheet" type="text/css" href="page_style.css">
+        <script src="scripts.js"></script>
         <!-- PyScript CSS -->
         <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
         <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
@@ -27,7 +28,12 @@
                 <option value="yes">Speak</option>
             </select>
             
-            <div class="section" id="find-verse-output"></div>
+            <br>
+
+            <div class="section custom_button">
+                <button onclick="toggle_visibility('find-verse-output', this)" class="expandable custom_button plus" id="find-verse-dropdown"></button>
+                <div class="hidden btn_group" id="find-verse-output"></div>
+            </div>
         </div>
 
         <br>

@@ -118,7 +118,7 @@ select {
     border-radius: 8px;
 }
 
-.custom_buttons button {
+.custom_button button {
     width: 100%;
     text-align: left;
     border: none;

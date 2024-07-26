@@ -151,6 +151,15 @@ def output_text(text: str, speach_text: str, output_location: str, event):
         dropdown = document.querySelector('#' + output_location + '-audio')
         want_tts = dropdown.value == 'yes'
 
+        title = ''
+        lines = text.split('\n')
+        if len(lines) > 0:
+            title = lines[0]
+
+            output_div = document.querySelector('#' + output_location + '-dropdown')
+            output_div.innerText = title
+
+
         output_div = document.querySelector('#' + output_location + '-output')
         output_div.innerText = text
     else:
