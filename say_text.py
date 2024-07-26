@@ -176,8 +176,8 @@ def get_all_verses(bible: dict, elipse: list):
 
     return (verse_list, named_list)
 
-def get_text(bible, prompt: str):
-    elipse = parse_prompt(prompt)#'Genesis 1:1-Revelation 22:21')
+def get_text(bible: dict, prompt: str):
+    elipse = parse_prompt(bible, prompt)#'Genesis 1:1-Revelation 22:21')
     verse_list, named_list = get_all_verses(bible, elipse)
 
     text = ''
