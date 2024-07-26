@@ -124,9 +124,10 @@ def get_all_verses(bible: dict, elipse: list):
     verse_list = []
     named_list = []
 
-    validity_1, best_book_1 = valid_verse(bible, elipse[0])
-    validity_2, best_book_2 = valid_verse(bible, elipse[1])
-
+    if len(elipse) > 0:
+        validity_1, best_book_1 = valid_verse(bible, elipse[0])
+    if len(elipse) > 1:
+        validity_2, best_book_2 = valid_verse(bible, elipse[1])
 
     if len(elipse) == 1 and validity_1:
         elipse[0][0] = best_book_1
