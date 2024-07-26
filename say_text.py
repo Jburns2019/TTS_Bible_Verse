@@ -4,6 +4,7 @@ import random
 html_accessed = True
 try:
     from pyscript import document
+    from pyscript import window
 except:
     import multiprocessing
     html_accessed = False
@@ -151,6 +152,8 @@ def output_text(text: str, speach_text: str, output_location: str, event):
         
         selected_option = dropdown.options[dropdown.selectedIndex]
         want_tts = selected_option.value == 'yes'
+
+        window.console.log(selected_option.value)
 
     if html_accessed:
         output_div = document.querySelector('#' + output_location + '-output')
