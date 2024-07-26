@@ -22,10 +22,9 @@
             <p>Example Verse - Ephesians 5:8-21</p>
             <input type="text" id="english" placeholder="Type verse..." py-keypress="start_generating_output"/>
             <button class="no-margin" py-click="start_generating_output">Find Verse</button>
-            <label for="find-verse-audio">TTS:</label>
             <select id="find-verse-audio">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
+                <option value="no">Don't Speak</option>
+                <option value="yes">Speak</option>
             </select>
             
             <div class="section" id="find-verse-output"></div>
@@ -40,10 +39,9 @@
                 A random chapter will be selected. If the chapter is less than 1000 characters long it will be considered too short and next chapter will be appended.
             </p>
             <button py-click="start_generating_random_reading">Generate Random Devotional</button>
-            <label for="devotion-audio">TTS:</label>
             <select id="devotion-audio">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
+                <option value="no">Don't Speak</option>
+                <option value="yes">Speak</option>
             </select>
 
             <div class="section" id="devotion-output"></div>
