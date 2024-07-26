@@ -4,7 +4,7 @@ import random
 html_accessed = True
 try:
     from pyscript import document
-    from pyscript import window
+    from Levenshtein import distance
 except:
     import multiprocessing
     html_accessed = False
@@ -76,6 +76,17 @@ def parse_prompt(prompt: str):
 
 def valid_verse(bible: dict, verse_breakdown: list):
     book, chap, verse = verse_breakdown
+    if not book in bible:
+        best_score = len(book)
+        best_book = book
+        for pot_book in bible:
+            pot_score = distance(book, pot_book)
+            if pot_score < best_score:
+                best_score = pot_score
+                best_book = pot_book
+        
+        book = best_book
+
     return book in bible and chap in bible[book] and verse in bible[book][chap]
 
 def get_all_verses(bible: dict, elipse: list):
