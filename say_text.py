@@ -1,5 +1,5 @@
-import random
 import js
+import random
 
 html_accessed = True
 try:
@@ -147,7 +147,7 @@ def get_text(bible, prompt: str):
 def output_text(text: str, speach_text: str, output_location: str, event):
     want_tts = True
     if html_accessed:
-        dropdown = js.document.querySelector('#' + output_location + '-audio')
+        dropdown = document.querySelector('#' + output_location + '-audio')
         
         selected_option = dropdown.options[dropdown.selectedIndex]
         want_tts = bool(selected_option.value)
