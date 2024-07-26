@@ -145,7 +145,7 @@ def get_text(bible, prompt: str):
     return (text, speach_text)
 
 def output_text(text: str, speach_text: str, output_location: str, event):
-    want_tts = True
+    want_tts = False
     # if html_accessed:
         # dropdown = document.querySelector('#' + output_location + '-audio')
         
