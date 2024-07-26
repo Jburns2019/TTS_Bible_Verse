@@ -1,16 +1,15 @@
-import pyttsx3
-import js
 import random
-import time
 
 html_accessed = True
 try:
     from pyscript import document
+    from pyscript import py_import
 except:
     import multiprocessing
     html_accessed = False
 
 def say_text(text: str):
+    import pyttsx3
     engine = pyttsx3.init()
 
     engine.setProperty('rate', 200)     # setting up new voice rate
@@ -151,7 +150,7 @@ def output_text(text: str, speach_text: str, output_location: str, event):
         dropdown = document.querySelector('#' + output_location + '-audio')
         
         #selected_option = dropdown.options[dropdown.selectedIndex]
-        want_tts = bool(dropdown.value)
+        #want_tts = bool(dropdown.value)
 
     if html_accessed:
         output_div = document.querySelector('#' + output_location + '-output')
@@ -161,6 +160,7 @@ def output_text(text: str, speach_text: str, output_location: str, event):
     
     if want_tts and event != None and len(text) < 350000:
         #https://github.com/kripken/speak.js/tree/master
+        js = py_import("js")
         js.speak(speach_text)
     elif event == None and want_tts:
         sayable_outputs = []
