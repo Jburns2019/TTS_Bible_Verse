@@ -1,10 +1,10 @@
 import js
 import random
+from Levenshtein import distance
 
 html_accessed = True
 try:
     from pyscript import document
-    from Levenshtein import distance
 except:
     import multiprocessing
     html_accessed = False
