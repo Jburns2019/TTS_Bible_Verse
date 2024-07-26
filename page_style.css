@@ -95,7 +95,7 @@ ul {
     border-color: var(--doubly_embeded_section_color);
 } 
 
-.section p, .section ol, .section ul, .section button, .section input {
+.section p, .section ol, .section ul, .section button, .section input, .section div {
     margin-left: 20px;
 }
 
