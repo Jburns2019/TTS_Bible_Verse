@@ -151,7 +151,7 @@ def output_text(text: str, speach_text: str, output_location: str, event):
         # dropdown = document.querySelector('#' + output_location + '-audio').options[document.querySelector('#' + output_location + '-audio').selectedIndex]
 
         output_div = document.querySelector('#' + output_location + '-output')
-        output_div.innerText = document.querySelector('#' + output_location + '-audio').options[document.querySelector('#' + output_location + '-audio').selectedIndex].value
+        output_div.innerText = document.querySelector('#' + output_location + '-audio')#.options[document.querySelector('#' + output_location + '-audio').selectedIndex].value
 
 
         # selected_option = dropdown.options[dropdown.selectedIndex]
