@@ -174,11 +174,31 @@ def get_all_verses(bible: dict, elipse: list):
                         verse_list.append(bible[book][str(chap)][str(verse)])
                         named_list.append(f'{book} {chap}:{verse}: ')
 
-    return (verse_list, named_list)
+    return (verse_list, named_list, elipse)
+
+def get_prompt_from_elipse(elipse):
+    prompt = ''
+    for split_verse in elipse:
+        book, chap, verse = split_verse
+
+        if len(prompt) == 0:
+            prompt += f'{book} {chap}:{verse}'
+        elif book in prompt and chap in prompt:
+            prompt += f'-{verse}'
+        elif book in prompt:
+            prompt += f'-{chap}:{verse}'
+        else:
+            prompt += f'-{book} {chap}:{verse}'
+    
+    return prompt
 
 def get_text(bible: dict, prompt: str):
     elipse = parse_prompt(bible, prompt)#'Genesis 1:1-Revelation 22:21')
-    verse_list, named_list = get_all_verses(bible, elipse)
+    verse_list, named_list, elipse = get_all_verses(bible, elipse)
+
+    used_prompt = get_prompt_from_elipse(elipse)
+    if len(used_prompt) > 0:
+        prompt = used_prompt
 
     text = ''
     speach_text = ''
@@ -190,7 +210,7 @@ def get_text(bible: dict, prompt: str):
             text += '\n'
             speach_text += '\n'
 
-    return (text, speach_text)
+    return (text, speach_text, prompt)
 
 def output_text(text: str, speach_text: str, output_location: str, event):
     want_tts = True
@@ -253,7 +273,7 @@ def gen_output(event):
             input_text = document.querySelector("#english")
             prompt = input_text.value
 
-        text, speach_text = get_text(bible, prompt)
+        text, speach_text, prompt = get_text(bible, prompt)
         text = prompt + '\n' + text
         speach_text = prompt.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
         # except:
@@ -299,8 +319,7 @@ def gen_random_reading(event):
         prev_length = length
         length = len(get_text(bible, verse_text)[0])
 
-    text, speach_text = get_text(bible, verse_text)
-    text, speach_text = get_text(bible, verse_text)
+    text, speach_text, _ = get_text(bible, verse_text)
     text = verse_text + '\n' + text
     speach_text = verse_text.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
     # except:
