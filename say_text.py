@@ -148,7 +148,10 @@ def get_text(bible, prompt: str):
 def output_text(text: str, speach_text: str, output_location: str, event):
     want_tts = False
     if html_accessed:
-        dropdown = js.document.querySelector('#' + output_location + '-audio')
+        output_div = document.querySelector('#' + output_location + '-output')
+        output_div.innerText = '#' + output_location + '-audio'
+
+        dropdown = document.querySelector('#' + output_location + '-audio')
         selected_option = dropdown.options[dropdown.selectedIndex]
         want_tts = selected_option.value == 'yes'
 
