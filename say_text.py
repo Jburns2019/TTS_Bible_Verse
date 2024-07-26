@@ -1,9 +1,9 @@
 import random
+import js
 
 html_accessed = True
 try:
     from pyscript import document
-    from pyscript import py_import
 except:
     import multiprocessing
     html_accessed = False
@@ -147,8 +147,7 @@ def get_text(bible, prompt: str):
 def output_text(text: str, speach_text: str, output_location: str, event):
     want_tts = True
     if html_accessed:
-        from js import document
-        dropdown = document.querySelector('#' + output_location + '-audio')
+        dropdown = js.document.querySelector('#' + output_location + '-audio')
         
         selected_option = dropdown.options[dropdown.selectedIndex]
         want_tts = bool(selected_option.value)
@@ -161,7 +160,6 @@ def output_text(text: str, speach_text: str, output_location: str, event):
     
     if want_tts and event != None and len(text) < 350000:
         #https://github.com/kripken/speak.js/tree/master
-        js = py_import("js")
         js.speak(speach_text)
     elif event == None and want_tts:
         sayable_outputs = []
