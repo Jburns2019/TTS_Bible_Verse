@@ -240,20 +240,20 @@ def start_generating_output(event=None):
 
 def gen_output(event):
     if event == None or event != None and (not hasattr(event, 'key') or event.key == 'Enter' ):
-        try:
-            bible = convert_to_dictionary()
-            
-            prompt = 'Genesis 1:1'#'Ephesians 5:8-21'
-            if html_accessed:
-                input_text = document.querySelector("#english")
-                prompt = input_text.value
+        # try:
+        bible = convert_to_dictionary()
+        
+        prompt = 'Genesis 1:1'#'Ephesians 5:8-21'
+        if html_accessed:
+            input_text = document.querySelector("#english")
+            prompt = input_text.value
 
-            text, speach_text = get_text(bible, prompt)
-            text = prompt + '\n' + text
-            speach_text = prompt.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
-        except:
-            text = '[Error]: Prompt was not accepted.'
-            speach_text = ''
+        text, speach_text = get_text(bible, prompt)
+        text = prompt + '\n' + text
+        speach_text = prompt.replace(':', ' ').replace('-', ' to ') + '\n' + speach_text
+        # except:
+        #     text = '[Error]: Prompt was not accepted.'
+        #     speach_text = ''
 
         output_text(text, speach_text, 'find-verse', event)
 
