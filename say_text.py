@@ -149,7 +149,7 @@ def output_text(text: str, speach_text: str, output_location: str, event):
     want_tts = True
     if html_accessed:
         dropdown = document.querySelector('#' + output_location + '-audio')
-        want_tts = dropdown.value
+        want_tts = dropdown.value == 'yes'
 
         output_div = document.querySelector('#' + output_location + '-output')
         output_div.innerText = text
