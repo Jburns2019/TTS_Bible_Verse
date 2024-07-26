@@ -85,7 +85,7 @@ def convert_to_dictionary():
 
     return bible_dictionary
 
-def parse_prompt(prompt: str):
+def parse_prompt(bible: dict, prompt: str):
     split = prompt.split('-')
 
     results = []
@@ -101,43 +101,38 @@ def parse_prompt(prompt: str):
             chap = results[0][1]
             verse = verse_prompt
 
-        results.append([book, chap, verse])
+        closest_book = find_closest_book(bible, book)
+        results.append([closest_book, chap, verse])
     
     return results
 
-def valid_verse(bible: dict, verse_breakdown: list):
-    book, chap, verse = verse_breakdown
+def find_closest_book(bible: dict, book: str):
+    best_book = book
     if not book in bible:
         best_score = len(book)
-        best_book = book
         for pot_book in bible:
             pot_score = distance(book, pot_book)
             if pot_score < best_score:
                 best_score = pot_score
                 best_book = pot_book
-        
-        book = best_book
+    
+    return best_book
 
-    return (book in bible and chap in bible[book] and verse in bible[book][chap], book)
+def valid_verse(bible: dict, verse_breakdown: list):
+    book, chap, verse = verse_breakdown
+    return book in bible and chap in bible[book] and verse in bible[book][chap]
 
 def get_all_verses(bible: dict, elipse: list):
     verse_list = []
     named_list = []
 
-    if len(elipse) > 0:
-        validity_1, best_book_1 = valid_verse(bible, elipse[0])
-    if len(elipse) > 1:
-        validity_2, best_book_2 = valid_verse(bible, elipse[1])
-
-    if len(elipse) == 1 and validity_1:
-        elipse[0][0] = best_book_1
+    if len(elipse) == 1 and valid_verse(bible, elipse[0]):
         book, chap, verse = elipse[0]
 
         verse_list.append(bible[book][chap][verse])
         named_list = [f'{book} {chap}:{verse}: ']
     
-    if len(elipse) > 1 and validity_1 and validity_2:
-        elipse[1][0] = best_book_2
+    if len(elipse) > 1 and valid_verse(bible, elipse[0]) and valid_verse(bible, elipse[1]):
         book_beg, chap_beg, verse_beg = elipse[0]
         book_end, chap_end, verse_end = elipse[1]
 
