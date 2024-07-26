@@ -1,4 +1,3 @@
 {
-    "packages": ["Levenshtein"],
     "files": {"asv.txt": "asv.txt", "World_English_Version.txt": "World_English_Version.txt"}
 }
