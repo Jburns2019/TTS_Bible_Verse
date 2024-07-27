@@ -9,7 +9,7 @@ except:
     html_accessed = False
 
 def distance(token1, token2):
-    distances = [[0 for j in range(len(token1) + 1)] for i in range(len(token2) + 1)]
+    distances = [[0 for j in range(len(token2) + 1)] for i in range(len(token1) + 1)]
     # distances = numpy.zeros((len(token1) + 1, len(token2) + 1))
 
     for t1 in range(len(token1) + 1):
