@@ -86,10 +86,37 @@ def convert_to_dictionary():
     return bible_dictionary
 
 def parse_prompt(bible: dict, prompt: str):
+    prompt = prompt.strip()
+    
+    split = prompt.split('-')
+    given_elipse = len(split) > 1
+
+    have_smart_ends = False
+    
+    if not given_elipse and not ':' in prompt and not prompt[-1].isdigit():
+        prompt = f'{prompt} 1:1-end:end'
+        have_smart_ends = True
+    elif not given_elipse and not ':' in prompt:
+        prompt = f'{prompt}:1-end'
+        have_smart_ends = True
+        
     split = prompt.split('-')
 
     results = []
-    for verse_prompt in split:
+    for index, verse_prompt in enumerate(split):
+        if not ':' in verse_prompt and not verse_prompt[-1].isdigit() and not have_smart_ends:
+            if index == 0:
+                verse_prompt = f'{verse_prompt} 1:1'
+            else:
+                verse_prompt = f'{verse_prompt} end:end'
+                have_smart_ends = True
+        elif not ':' in verse_prompt and not have_smart_ends:
+            if index == 0:
+                verse_prompt = f'{verse_prompt}:1'
+            else:
+                verse_prompt = f'{verse_prompt}:end'
+                have_smart_ends = True
+        
         if ':' in verse_prompt and verse_prompt.count(' ') > 0:
             book, chap, verse, text = parse_verse(verse_prompt, want_text=False)
         elif ':' in verse_prompt:
@@ -103,6 +130,16 @@ def parse_prompt(bible: dict, prompt: str):
 
         closest_book = find_closest_book(bible, book)
         results.append([closest_book, chap, verse])
+
+    if have_smart_ends:
+        for index, verse_struct in enumerate(results):
+            book, chap, verse = verse_struct
+            if chap == 'end':
+                chap = list(bible[book].keys())[-1]
+            if verse == 'end':
+                verse = list(bible[book][chap].keys())[-1]
+            
+            results[index] = [book, chap, verse]
     
     return results
 
@@ -329,7 +366,10 @@ def gen_random_reading(event):
     output_text(text, speach_text, 'devotion', event)
 
 if __name__ == '__main__' and not html_accessed:
-    start_generating_random_reading()
-    print('I launched a thread.')
-    start_generating_random_reading()
-    start_generating_output()
+    # start_generating_random_reading()
+    # print('I launched a thread.')
+    # start_generating_random_reading()
+    # start_generating_output()
+
+    bible = convert_to_dictionary()
+    print(parse_prompt(bible, 'Genesis'))
