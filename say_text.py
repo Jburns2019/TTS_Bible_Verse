@@ -103,7 +103,11 @@ def parse_prompt(bible: dict, prompt: str):
     split = prompt.split('-')
 
     results = []
+    was_colon = False
     for index, verse_prompt in enumerate(split):
+        if index == 0 and ':' in verse_prompt:
+            was_colon = True
+
         if not ':' in verse_prompt and not verse_prompt[-1].isdigit() and not have_smart_ends:
             if index == 0:
                 verse_prompt = f'{verse_prompt} 1:1'
@@ -113,7 +117,7 @@ def parse_prompt(bible: dict, prompt: str):
         elif not ':' in verse_prompt and not have_smart_ends:
             if index == 0:
                 verse_prompt = f'{verse_prompt}:1'
-            else:
+            elif not verse_prompt.isdigit() or not was_colon:
                 verse_prompt = f'{verse_prompt}:end'
                 have_smart_ends = True
         
@@ -130,6 +134,8 @@ def parse_prompt(bible: dict, prompt: str):
 
         closest_book = find_closest_book(bible, book)
         results.append([closest_book, chap, verse])
+
+    print(results)
 
     if have_smart_ends:
         for index, verse_struct in enumerate(results):
@@ -372,4 +378,4 @@ if __name__ == '__main__' and not html_accessed:
     # start_generating_output()
 
     bible = convert_to_dictionary()
-    print(parse_prompt(bible, 'Genesis'))
+    print(parse_prompt(bible, 'Ephesians 3-4'))
