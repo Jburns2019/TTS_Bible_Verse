@@ -21,4 +21,8 @@ function fadeEffect() {
     }
 }
 
-window.addEventListener('load', fadeEffect);
+while (document.getElementById('py-0') == null);
+if (document.getElementById('py-0')) {
+    fadeEffect();
+}
+// window.addEventListener('load', fadeEffect);

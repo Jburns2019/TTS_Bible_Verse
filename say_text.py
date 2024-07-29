@@ -135,8 +135,6 @@ def parse_prompt(bible: dict, prompt: str):
         closest_book = find_closest_book(bible, book)
         results.append([closest_book, chap, verse])
 
-    print(results)
-
     if have_smart_ends:
         for index, verse_struct in enumerate(results):
             book, chap, verse = verse_struct
