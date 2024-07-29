@@ -5,7 +5,7 @@ function toggle_visibility(id_name, button) {
 }
 
 function fadeEffect() {
-    if (document.getElementById('py-0')) {
+    if (document.querySelector('script-py')) {
         var preloader = document.querySelector('#preload');
         
         if (preloader != null && (preloader.style.opacity == "" || preloader.style.opacity > 0)) {
