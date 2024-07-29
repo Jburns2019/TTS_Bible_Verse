@@ -21,7 +21,7 @@ function fadeEffect() {
     }
 }
 
-while (document.getElementById('py-0') == null);
+// while (document.getElementById('py-0') == null);
 if (document.getElementById('py-0')) {
     fadeEffect();
 }
