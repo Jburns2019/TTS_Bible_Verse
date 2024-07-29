@@ -21,4 +21,8 @@ function fadeEffect() {
     }
 }
 
-window.addEventListener('load', fadeEffect);
+if (document.readyState == "complete") {
+    fadeEffect();
+    alert("Your page is loaded");
+}
+// window.onload('load', fadeEffect);
