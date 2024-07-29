@@ -21,8 +21,12 @@ function fadeEffect() {
     }
 }
 
-if (document.readyState == "complete") {
-    fadeEffect();
-    alert("Your page is loaded");
-}
+var interval = setInterval(function() {
+    if(document.readyState === 'complete') {
+        clearInterval(interval);
+        fadeEffect();
+        alert("Your page is loaded");
+        done();
+    }    
+}, 100);
 // window.onload('load', fadeEffect);
