@@ -21,10 +21,4 @@ function fadeEffect() {
     }
 }
 
-var interval = setInterval(function() {
-    if(document.readyState === 'complete') {
-        clearInterval(interval);
-        fadeEffect();
-    }    
-}, 100);
-// window.onload('load', fadeEffect);
+window.addEventListener('load', fadeEffect);
