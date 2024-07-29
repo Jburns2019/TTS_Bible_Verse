@@ -5,24 +5,29 @@ function toggle_visibility(id_name, button) {
 }
 
 function fadeEffect() {
-    var preloader = document.querySelector('#preload');
-    
-    while (preloader != null && (preloader.style.opacity == "" || preloader.style.opacity > 0)) {
-        if (preloader.style.opacity == "") {
-            preloader.style.opacity = 1;
+    if (document.getElementById('py-0')) {
+        var preloader = document.querySelector('#preload');
+        
+        if (preloader != null && (preloader.style.opacity == "" || preloader.style.opacity > 0)) {
+            if (preloader.style.opacity == "") {
+                preloader.style.opacity = 1;
+            }
+            else if (preloader.style.opacity > 0) {
+                preloader.style.opacity -= .1;
+            }
         }
-        else if (preloader.style.opacity > 0) {
-            preloader.style.opacity -= .1;
-        }
-    }
 
-    if (preloader) {
-        preloader.remove();
+        if (preloader && preloader.style.opacity == 0) {
+            preloader.remove();
+            clearInterval();
+        }
     }
 }
+
+setInterval(fadeEffect, 100);
 
 // while (document.getElementById('py-0') == null);
-if (document.getElementById('py-0')) {
-    fadeEffect();
-}
+// if (document.getElementById('py-0')) {
+//     fadeEffect();
+// }
 // window.addEventListener('load', fadeEffect);
