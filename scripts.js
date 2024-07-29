@@ -19,7 +19,7 @@ function fadeEffect() {
 
         if (preloader && preloader.style.opacity == 0) {
             preloader.remove();
-            clearInterval();
+            clearInterval(fadeEffect);
         }
     }
 }
