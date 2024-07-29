@@ -25,7 +25,6 @@ var interval = setInterval(function() {
     if(document.readyState === 'complete') {
         clearInterval(interval);
         fadeEffect();
-        done();
     }    
 }, 100);
 // window.onload('load', fadeEffect);
