@@ -15,6 +15,10 @@ function fadeEffect() {
             preloader.style.opacity -= .1;
         }
     }
+
+    if (preloader) {
+        preloader.remove();
+    }
 }
 
 window.addEventListener('load', fadeEffect);
