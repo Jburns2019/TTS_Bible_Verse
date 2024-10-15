@@ -3,7 +3,7 @@ import random
 
 html_accessed = True
 try:
-    from pyscript import document
+    from pyscript import document, window
 except:
     import multiprocessing
     html_accessed = False
@@ -274,7 +274,8 @@ def output_text(text: str, speach_text: str, output_location: str, event):
     
     if want_tts and event != None and len(text) < 350000:
         #https://github.com/kripken/speak.js/tree/master
-        js.speak(speach_text)
+        js.new_speak(speach_text)
+        #js.speak(speach_text)
     elif event == None and want_tts:
         sayable_outputs = []
         for character_index in range(0, len(speach_text), 350000):

@@ -4,6 +4,12 @@ function toggle_visibility(id_name, button) {
     button.classList.toggle('minus')
 }
 
+function new_speak(text) {
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = text;
+    speechSynthesis.speak(msg);
+}
+
 function fadeEffect() {
     if (document.querySelector('script-py')) {
         var preloader = document.querySelector('#preload');
